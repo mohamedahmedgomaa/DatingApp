@@ -1,0 +1,7 @@
+<h1>{{title}}</h1>
+
+<ul  class="border border-danger p-3 bg-light">
+  @for (user of users; track user.id) {
+    <li  class="text-dark">{{ user.id }} - {{ user.userName }}</li>
+  }
+</ul>
