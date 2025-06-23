@@ -3,11 +3,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Nav } from "./nav/nav";
 import { Account } from './_services/account';
 import { Home } from "./home/home";
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, Nav, Home],
+  imports: [RouterOutlet, CommonModule, Nav],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -21,10 +22,10 @@ export class App implements OnInit {
 
   setCurrentUser() {
     const userString = localStorage.getItem('user');
-    if(!userString) return;
+    if (!userString) return;
     const user = JSON.parse(userString);
     this.accountService.currentUser.set(user);
   }
 
-  
+
 }
