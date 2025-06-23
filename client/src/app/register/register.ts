@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, inject, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Account } from '../_services/account';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -12,6 +13,7 @@ import { Account } from '../_services/account';
 export class Register {
   private accountService = inject(Account);
   cancelRegister = output<boolean>();
+  private toastr = inject(ToastrService);
   private cdr = inject(ChangeDetectorRef);
   model: any = {}
 
@@ -20,9 +22,9 @@ export class Register {
       next: response => {
         console.log(response);
         this.cancel();
-           this.cdr.detectChanges(); // Force Angular to update the view
+        this.cdr.detectChanges(); // Force Angular to update the view
       },
-      error: error => console.log(error),
+      error: error => this.toastr.error(error.error),
     });
   }
 
