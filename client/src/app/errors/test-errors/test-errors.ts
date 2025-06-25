@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-test-errors',
@@ -8,7 +9,7 @@ import { ChangeDetectorRef, Component, inject } from '@angular/core';
   styleUrl: './test-errors.css'
 })
 export class TestErrors {
-  baseUrl = 'https://localhost:5001/api/';
+  baseUrl = environment.apiUrl;
   private http = inject(HttpClient);
   private cdr = inject(ChangeDetectorRef);
   validationErrors: string[] = [];
