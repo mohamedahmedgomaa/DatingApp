@@ -4,10 +4,12 @@ import { ActivatedRoute } from '@angular/router';
 import { Member } from '../../_models/member';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { GalleryItem, GalleryModule, ImageItem } from 'ng-gallery';
+import { TimeagoModule } from 'ngx-timeago';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-member-detail',
-  imports: [TabsModule,GalleryModule],
+  imports: [TabsModule, GalleryModule, TimeagoModule, DatePipe],
   templateUrl: './member-detail.html',
   styleUrl: './member-detail.css'
 })
@@ -16,7 +18,7 @@ export class MemberDetail implements OnInit {
   private route = inject(ActivatedRoute);
   private cdr = inject(ChangeDetectorRef);
   member?: Member;
-  images:GalleryItem[] = [];
+  images: GalleryItem[] = [];
 
   ngOnInit(): void {
     this.loadMember()
@@ -29,7 +31,7 @@ export class MemberDetail implements OnInit {
       next: member => {
         this.member = member;
         member.photos.map(p => {
-          this.images.push(new ImageItem({src: p.url, thumb: p.url}))
+          this.images.push(new ImageItem({ src: p.url, thumb: p.url }))
         })
         this.cdr.detectChanges();
       }
